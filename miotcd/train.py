@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-m','--model',
                     type=str,
                     help='The model to build the YOLO instance around.',
-                    default='yolov8n.yaml')
+                    default='yolov8n.pt')
 parser.add_argument('-d', '--data',
                     type=str,
                     help="The dataset that ought to be used. Refers to a '.yaml' file.", 
@@ -27,7 +27,7 @@ model = YOLO(args.model)
 if args.mac:
     results = model.train(data=args.data, epochs=args.epochs, device='mps')
 else:
-    results = model.train(data=args.data, epochs=args.epochs)
+    results = model.train(data=args.data, epochs=args.epochs, workers=0, pretrained=True)
 
 # Evaluate the model's performance on the validation set
 results = model.val()
