@@ -187,5 +187,3 @@ python miotcd/predict.py <PATH/TO/INPUT/VIDEO> -m <PATH/TO/.pt FILE> -g
 The last flag, `-g`, corresponds with Windows and CUDA-enabled GPU usage, like with `train.py`. Again, if you have a Macbook, you can replace this and the code with the necessary changes.
 
 This last step will add bounding boxes to the footage and generate a CSV file that contains the bounding boxes for each object in each timestamp of the image.
-
-
