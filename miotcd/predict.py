@@ -33,7 +33,8 @@ def predict(input, model, use_gpu=False, preview=False):
     print(f'FPS: {fps}')
     height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-    output = cv2.VideoWriter(os.path.join(pred_output_dir,'predict.avi'),cv2.VideoWriter_fourcc(*'MJPG'),fps,(int(width),int(height)))
+    output_vidname = os.path.join(pred_output_dir,'predict.avi')
+    output = cv2.VideoWriter(output_vidname,cv2.VideoWriter_fourcc(*'MJPG'),fps,(int(width),int(height)))
     
     if preview:
         output_window = 'Yolov8 frame'
@@ -110,6 +111,7 @@ def predict(input, model, use_gpu=False, preview=False):
     df = pd.concat(predict_history)
     output_filename = os.path.join(pred_output_dir,"predicted_labels.csv")
     df.to_csv(output_filename, index=False)
+    return output_filename, output_vidname
 
 if __name__ == "__main__":
     # PARSE ARGUMENTS
